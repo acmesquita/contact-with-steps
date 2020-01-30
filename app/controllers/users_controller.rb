@@ -24,24 +24,39 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    Users::Create.call(params: user_params) do |m|
+      m.success do |user|
+        respond_to do |format|
+          format.html { redirect_to user, notice: 'User was successfully created.' }
+          format.json { render :show, status: :created, location: user }
+        end
+      end
 
-    respond_to do |format|
-      if @user.save
-
-        CreateUserCrm.new.call(@user)
-
-        InformToPlatform.new.call(@user)
-
-        NotifierNewContact.new.call(@user)
-
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+      m.failure do |failure|
+        user = User.new(user_params)
+        respond_to do |format|
+          format.html { render :new }
+          format.json { render json: user.errors, status: :unprocessable_entity }
+        end
       end
     end
+
+    # respond_to do |format|
+    #   if @user.save
+
+    #     CreateUserCrm.new.call(@user)
+
+    #     InformToPlatform.new.call(@user)
+
+    #     NotifierNewContact.new.call(@user)
+
+    #     format.html { redirect_to @user, notice: 'User was successfully created.' }
+    #     format.json { render :show, status: :created, location: @user }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @user.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /users/1
