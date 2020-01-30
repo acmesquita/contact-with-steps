@@ -16,11 +16,13 @@ class Users::Create < BaseTransaction
     if(@user.errors.any?)
       Failure(error: @user.errors.full_messages.join(' | '))
     else
+      input[:test] = 'blá blá'
       Success(input)
     end
   end
 
   def create_user_crm(input)
+    puts "############# #{input.fetch(:test)}"
     CreateUserCrm.new.call(@user)
 
     Success(input)
