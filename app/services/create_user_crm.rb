@@ -1,4 +1,4 @@
-class CreateUsersCrm
+class CreateUserCrm
 
   def call(user)
     puts "Enviando para o crm o usuário: #{user.name}"
