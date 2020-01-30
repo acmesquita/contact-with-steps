@@ -1,24 +1,7 @@
-# README
+# Contact with dry-transaction
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Projeto de Prova de Conceito (POC) para demonstrar o uso da gem 'dry-transaction'
 
-Things you may want to cover:
+Na branch `master` tem uma versão do código com os step de criação de um usuário/contato direto no controller
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Já na branch `dry-transaction`, tem a implementação do mesmo código com a estrutura sugerida pelo `dry-transaction`
