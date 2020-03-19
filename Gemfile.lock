@@ -62,6 +62,7 @@ GEM
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     builder (3.2.4)
+    business_process (1.0.3)
     byebug (11.1.1)
     capybara (3.31.0)
       addressable
@@ -201,6 +202,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
+  business_process
   byebug
   capybara (>= 2.15)
   jbuilder (~> 2.7)

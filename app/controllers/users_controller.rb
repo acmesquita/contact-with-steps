@@ -29,14 +29,15 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
 
-        CreateUserCrm.new.call(@user)
+        service = ProcessUserService.call(user: @user)
 
-        InformToPlatform.new.call(@user)
-
-        NotifierNewContact.new.call(@user)
-
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        if service.success?
+          format.html { redirect_to @user, notice: 'User was successfully created and process successfully' }
+          format.json { render :show, status: :created, location: @user }
+        else
+          format.html { redirect_to @user, notice: 'User was successfully created, but process fail' }
+          format.json { render :show, status: :created, location: @user }  
+        end
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
