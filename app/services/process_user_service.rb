@@ -9,14 +9,14 @@ class ProcessUserService < BusinessProcess::Base
   private
 
   def create_user
-    CreateUserCRM.new.call(user)
+    CreateUserCrm.new.call(user)
   end
 
   def inform_to_platform
-    InformToPlatform.new.call(@user)
+    InformToPlatform.new.call(user)
   end
 
   def notifier_new_contact
-    NotifierNewContact.new.call(@user)
+    NotifierNewContact.new.call(user)
   end
 end
